@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
 import { ArrowUpRight } from "lucide-react";
 import { usePexelsImage } from "@/lib/usePexelsImage";
 
@@ -217,15 +216,7 @@ export default function CuratedShop() {
               fontSize: "11px",
               letterSpacing: "0.2em",
             }}
-            onClick={() => {
-              gsap.to("main", {
-                opacity: 0,
-                y: -20,
-                duration: 0.5,
-                ease: "power2.inOut",
-                onComplete: () => { window.location.href = "/boutique"; }
-              });
-            }}
+            onClick={() => window.location.href = "/boutique"}
           >
             VIEW ALL ITEMS
           </motion.button>

@@ -1,24 +1,18 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { products } from "@/lib/products";
 import { usePexelsImage } from "@/lib/usePexelsImage";
 
-function ProductCard({ p, onNavigate }) {
+function ProductCard({ p }) {
   const { imageUrl, loading } = usePexelsImage(p.query, "portrait");
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    onNavigate(`/boutique/${p.slug}`);
-  };
-
   return (
-    <a href={`/boutique/${p.slug}`} onClick={handleClick}>
+    <Link href={`/boutique/${p.slug}`}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -112,7 +106,7 @@ function ProductCard({ p, onNavigate }) {
           </span>
         </div>
       </motion.div>
-    </a>
+    </Link>
   );
 }
 
@@ -124,27 +118,8 @@ export default function BoutiqueClient() {
     ? products 
     : products.filter(p => p.category.toUpperCase() === activeTab);
 
-  // GSAP entrance animation
-  useEffect(() => {
-    gsap.fromTo("main",
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }
-    );
-  }, []);
-
-  // Reusable exit transition helper
-  const navigateWithTransition = useCallback((url) => {
-    gsap.to("main", {
-      opacity: 0,
-      y: -20,
-      duration: 0.5,
-      ease: "power2.inOut",
-      onComplete: () => { window.location.href = url; }
-    });
-  }, []);
-
   const handleNavClick = (sectionId) => {
-    navigateWithTransition(`/#${sectionId}`);
+    window.location.href = `/#${sectionId}`;
   };
 
   return (
@@ -243,7 +218,7 @@ export default function BoutiqueClient() {
           {/* Product Grid */}
           <div className="boutique-grid">
             {filteredProducts.map((p) => (
-              <ProductCard key={p.slug} p={p} onNavigate={navigateWithTransition} />
+              <ProductCard key={p.slug} p={p} />
             ))}
           </div>
         </div>
@@ -278,12 +253,11 @@ export default function BoutiqueClient() {
             >
               We source bespoke pieces on request.
             </p>
-            <button
-              className="boutique-cta-btn"
-              onClick={() => navigateWithTransition("/#contact")}
-            >
-              CONTACT US
-            </button>
+            <Link href="/#contact">
+              <button className="boutique-cta-btn">
+                CONTACT US
+              </button>
+            </Link>
           </div>
         </section>
       </main>

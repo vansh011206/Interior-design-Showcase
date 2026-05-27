@@ -1,24 +1,18 @@
 "use client";
 
-import React, { useEffect, useCallback } from "react";
+import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { products } from "@/lib/products";
 import { usePexelsImage } from "@/lib/usePexelsImage";
 
-function RelatedProductCard({ p, onNavigate }) {
+function RelatedProductCard({ p }) {
   const { imageUrl, loading } = usePexelsImage(p.query, "portrait");
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    onNavigate(`/boutique/${p.slug}`);
-  };
-
   return (
-    <a href={`/boutique/${p.slug}`} onClick={handleClick}>
+    <Link href={`/boutique/${p.slug}`}>
       <motion.div
         whileHover={{ y: -6 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -109,7 +103,7 @@ function RelatedProductCard({ p, onNavigate }) {
           </span>
         </div>
       </motion.div>
-    </a>
+    </Link>
   );
 }
 
@@ -140,32 +134,13 @@ export default function ProductDetailClient({ slug }) {
     relatedProducts.push(...additional);
   }
 
-  // GSAP entrance animation
-  useEffect(() => {
-    gsap.fromTo("main",
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }
-    );
-  }, []);
-
-  // Reusable exit transition helper
-  const navigateWithTransition = useCallback((url) => {
-    gsap.to("main", {
-      opacity: 0,
-      y: -20,
-      duration: 0.5,
-      ease: "power2.inOut",
-      onComplete: () => { window.location.href = url; }
-    });
-  }, []);
-
   const handleNavClick = (sectionId) => {
-    navigateWithTransition(`/#${sectionId}`);
+    window.location.href = `/#${sectionId}`;
   };
 
   const handleEnquiry = () => {
     alert(`Enquiry for "${product.name}" has been initiated. Redirecting you to our contact section to complete your request.`);
-    navigateWithTransition("/#contact");
+    window.location.href = "/#contact";
   };
 
   return (
@@ -177,9 +152,8 @@ export default function ProductDetailClient({ slug }) {
         <div className="container" style={{ paddingTop: "30px" }}>
           {/* Back Navigation Link */}
           <div style={{ marginBottom: "2rem" }}>
-            <a
+            <Link
               href="/boutique"
-              onClick={(e) => { e.preventDefault(); navigateWithTransition("/boutique"); }}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -189,12 +163,11 @@ export default function ProductDetailClient({ slug }) {
                 textTransform: "uppercase",
                 fontWeight: "600",
                 transition: "color 0.25s ease",
-                cursor: "pointer",
               }}
               className="boutique-back-link"
             >
               ← Back to Boutique
-            </a>
+            </Link>
           </div>
 
           {/* Split Detail Layout */}
@@ -382,7 +355,7 @@ export default function ProductDetailClient({ slug }) {
               className="related-grid"
             >
               {relatedProducts.map((p) => (
-                <RelatedProductCard key={p.slug} p={p} onNavigate={navigateWithTransition} />
+                <RelatedProductCard key={p.slug} p={p} />
               ))}
             </div>
           </section>
@@ -418,12 +391,11 @@ export default function ProductDetailClient({ slug }) {
             >
               We source bespoke pieces on request.
             </p>
-            <button
-              className="boutique-cta-btn"
-              onClick={() => navigateWithTransition("/#contact")}
-            >
-              CONTACT US
-            </button>
+            <Link href="/#contact">
+              <button className="boutique-cta-btn">
+                CONTACT US
+              </button>
+            </Link>
           </div>
         </section>
       </main>
