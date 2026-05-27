@@ -45,26 +45,6 @@ function ProductCard({ p, idx }) {
         }}
         className="product-image-container"
       >
-        {/* Sale Tag */}
-        {p.sale && (
-          <span
-            style={{
-              position: "absolute",
-              top: "0",
-              left: "0",
-              padding: "8px 10px",
-              fontSize: "10px",
-              letterSpacing: "0.18em",
-              color: "#9A8F82",
-              fontWeight: "400",
-              zIndex: "5",
-              textTransform: "lowercase",
-            }}
-          >
-            10% off
-          </span>
-        )}
-
         {/* Product Image */}
         {loading ? (
           <div className="pexels-skeleton" style={{ width: "100%", height: "100%", borderRadius: "4px" }} />
@@ -88,35 +68,23 @@ function ProductCard({ p, idx }) {
           </motion.div>
         )}
 
-        {/* Add to Cart Overlay */}
+        {/* Hover Overlay */}
         <div
           style={{
             position: "absolute",
-            bottom: 0,
+            top: 0,
             left: 0,
             right: 0,
-            height: "40px",
-            background: "rgba(26, 26, 26, 0.95)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transform: "translateY(100%)",
-            transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-            borderRadius: "0 0 4px 4px",
+            bottom: 0,
+            background: "rgba(20, 16, 12, 0.25)",
+            opacity: 0,
+            transition: "opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+            borderRadius: "4px",
+            pointerEvents: "none",
+            zIndex: 3,
           }}
-          className="shop-overlay"
-        >
-          <span
-            style={{
-              color: "var(--bg-primary)",
-              fontSize: "0.75rem",
-              fontWeight: "600",
-              letterSpacing: "0.1em",
-            }}
-          >
-            QUICK SHOP +
-          </span>
-        </div>
+          className="hover-overlay"
+        />
       </div>
 
       {/* Product Info */}
@@ -263,8 +231,8 @@ export default function CuratedShop() {
       </div>
 
       <style jsx global>{`
-        .product-image-container:hover .shop-overlay {
-          transform: translateY(0) !important;
+        .product-image-container:hover .hover-overlay {
+          opacity: 1;
         }
       `}</style>
     </section>
