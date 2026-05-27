@@ -178,7 +178,7 @@ export default function Header({ activeSection, onNavClick }) {
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
       className="glass-header"
       style={{
-        padding: isScrolled ? "1rem 0" : "1.8rem 0",
+        padding: isScrolled ? "0.6rem 0" : "1.1rem 0",
         boxShadow: isScrolled
           ? "0 10px 40px rgba(26, 26, 26, 0.05)"
           : "none",
@@ -357,7 +357,7 @@ export default function Header({ activeSection, onNavClick }) {
               overflow: "visible",
             }}
           >
-            <div className="container" style={{ padding: "1.2rem 4rem", position: "relative" }}>
+            <div className="container search-container" style={{ position: "relative" }}>
               <div style={{ display: "flex", alignItems: "center", width: "100%", gap: "1rem" }}>
                 <Search size={18} color="#9A8F82" strokeWidth={1.5} style={{ flexShrink: 0 }} />
                 
@@ -532,16 +532,6 @@ export default function Header({ activeSection, onNavClick }) {
               }
               .search-result-item:hover {
                 background-color: #EFE9DF !important;
-              }
-              
-              /* Mobile responsive menu controls */
-              @media (max-width: 768px) {
-                .desktop-nav {
-                  display: none !important;
-                }
-                .mobile-menu-btn {
-                  display: flex !important;
-                }
               }
             ` }} />
           </motion.div>

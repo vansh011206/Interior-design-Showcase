@@ -712,6 +712,11 @@ export default function PortfolioDetailClient({ slug }) {
             font-size: 46px !important;
           }
         }
+        @media (max-width: 480px) {
+          .project-hero-title {
+            font-size: 32px !important;
+          }
+        }
         @media (max-width: 768px) {
           .project-intro-grid {
             grid-template-columns: 1fr !important;

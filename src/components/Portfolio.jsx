@@ -123,16 +123,7 @@ export default function Portfolio() {
         </div>
 
         {/* Filter Navigation */}
-        <div
-          style={{
-            display: "flex",
-            gap: "1.5rem",
-            marginBottom: "4rem",
-            borderBottom: "1px solid rgba(212, 200, 190, 0.3)",
-            paddingBottom: "1rem",
-            flexWrap: "wrap",
-          }}
-        >
+        <div className="filter-container">
           {filters.map((filter) => {
             const isSelected = selectedFilter === filter;
             return (
@@ -149,6 +140,7 @@ export default function Portfolio() {
                   position: "relative",
                   textTransform: "uppercase",
                   transition: "var(--transition-fast)",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {filter}
@@ -174,12 +166,7 @@ export default function Portfolio() {
         {/* Masonry Grid */}
         <motion.div
           layout
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(12, 1fr)",
-            gap: "2.5rem",
-            minHeight: "450px",
-          }}
+          className="portfolio-grid"
         >
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => {
@@ -226,14 +213,9 @@ export default function Portfolio() {
                     style={{ display: "flex", flexDirection: "column", textDecoration: "none", color: "inherit", width: "100%" }}
                   >
                     <div
+                      className={`portfolio-img-wrapper ${item.span}`}
                       style={{
-                        width: "100%",
-                        height: height,
-                        overflow: "hidden",
-                        position: "relative",
                         borderRadius: item.id === 1 ? "300px 300px 0 0" : "0",
-                        boxShadow: "0 25px 50px rgba(26,26,26,0.04)",
-                        marginBottom: "1.5rem",
                       }}
                     >
                       {isLoading ? (

@@ -467,6 +467,11 @@ export default function ServiceDetailClient({ slug }) {
             font-size: 42px !important;
           }
         }
+        @media (max-width: 480px) {
+          .service-hero-title {
+            font-size: 32px !important;
+          }
+        }
         @media (max-width: 900px) {
           .process-grid {
             grid-template-columns: 1fr !important;
