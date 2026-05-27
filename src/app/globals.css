@@ -452,3 +452,15 @@ button, input, select, textarea {
   }
 }
 
+/* Responsive Container Vertical Spacing */
+.container-padding-y {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+@media (max-width: 768px) {
+  .container-padding-y {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+}
+

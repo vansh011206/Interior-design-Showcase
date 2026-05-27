@@ -383,7 +383,7 @@ export default function PortfolioDetailClient({ slug }) {
 
         {/* 2. Project Intro Section (Two Column, Padding: 100px 0) */}
         <section style={{ backgroundColor: "#F5F0E8" }}>
-          <div className="container" style={{ padding: "100px 0" }}>
+          <div className="container container-padding-y">
             <div className="project-intro-grid" style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr", gap: "6rem" }}>
               {/* Left Column: Poetic Pull Quote */}
               <motion.div
@@ -560,7 +560,7 @@ export default function PortfolioDetailClient({ slug }) {
 
         {/* 6. Materials & Mood Section (Two Column, Padding: 100px 0) */}
         <section style={{ backgroundColor: "#F5F0E8" }}>
-          <div className="container" style={{ padding: "100px 0" }}>
+          <div className="container container-padding-y">
             <div className="materials-mood-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6rem" }}>
               {/* Left Column: Materials Used */}
               <motion.div
