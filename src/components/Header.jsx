@@ -211,6 +211,7 @@ export default function Header({ activeSection, onNavClick }) {
             textTransform: "uppercase",
             fontFamily: "var(--font-serif)",
             display: "inline-block",
+            color: "var(--text-primary)",
           }}
         >
           DAROS
