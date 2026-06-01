@@ -13,6 +13,22 @@ import Footer from "@/components/Footer";
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
 
+  // Handle hash scrolling on page load (e.g., redirecting from boutique/portfolio subpages)
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const id = hash.replace("#", "");
+      const timer = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+          setActiveSection(id);
+        }
+      }, 500); // Wait 500ms for Pexels images & other dynamic content to load/render
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   // Scroll handler to track active section in navigation
   useEffect(() => {
     const handleScroll = () => {

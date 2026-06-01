@@ -325,7 +325,9 @@ export default function Header({ activeSection, onNavClick }) {
                   onClick={(e) => {
                     e.preventDefault();
                     setIsMobileMenuOpen(false);
-                    onNavClick(item.id);
+                    setTimeout(() => {
+                      onNavClick(item.id);
+                    }, 250);
                   }}
                   style={{
                     fontSize: "12px",
